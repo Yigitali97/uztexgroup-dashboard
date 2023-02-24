@@ -14,11 +14,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import LogoutIcon from "@mui/icons-material/Logout";
-
 import { adminListItems, superAdminListItems } from "../constants/listItems";
 import { useSelector } from "react-redux";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import { dispatch } from "../redux";
+import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -69,6 +69,7 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 export default function Layout({ children }) {
+  const navigate = useNavigate();
   const { user_role } = useSelector((store) => store.auth);
   const sidebarList =
     user_role === "Admin" ? adminListItems : superAdminListItems;
@@ -76,6 +77,10 @@ export default function Layout({ children }) {
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const handleRouteChange = (path) => {
+    navigate(path);
   };
 
   const onLogoutClick = () => {
@@ -135,7 +140,15 @@ export default function Layout({ children }) {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {sidebarList}
+            {sidebarList?.map((item) => (
+              <ListItemButton
+                key={item?.title}
+                onClick={() => handleRouteChange(item?.path)}
+              >
+                <ListItemIcon>{item.icon}</ListItemIcon>
+                <ListItemText primary={item.title} />
+              </ListItemButton>
+            ))}
             <Divider sx={{ my: 1 }} />
             <ListItemButton onClick={onLogoutClick}>
               <ListItemIcon>

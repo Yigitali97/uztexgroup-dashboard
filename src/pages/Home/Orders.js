@@ -5,7 +5,7 @@ import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -72,7 +72,8 @@ export default function Orders() {
             <TableCell>Name</TableCell>
             <TableCell>Ship To</TableCell>
             <TableCell>Payment Method</TableCell>
-            <TableCell align="right">Sale Amount</TableCell>
+            <TableCell>Sale Amount</TableCell>
+            <TableCell />
           </TableRow>
         </TableHead>
         <TableBody>
@@ -82,7 +83,10 @@ export default function Orders() {
               <TableCell>{row.name}</TableCell>
               <TableCell>{row.shipTo}</TableCell>
               <TableCell>{row.paymentMethod}</TableCell>
-              <TableCell align="right">{`$${row.amount}`}</TableCell>
+              <TableCell>{`$${row.amount}`}</TableCell>
+              <TableCell>
+                <Button>hello</Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>
