@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export const axiosInstance = Axios.create({
-  baseURL: "https://c39a-91-90-219-174.in.ngrok.io/uz/api",
+  baseURL: "https://3896-91-90-219-174.in.ngrok.io/uz/api",
 });
 
 axiosInstance.interceptors.request.use(
@@ -19,7 +19,6 @@ axiosInstance.interceptors.request.use(
 );
 
 export const API = {
-  getDocuments: () => axiosInstance.get("/documents"),
-  getSignleDocuments: (payload) => axiosInstance.get(`/document/${payload}`),
-  createDocument: (payload) => axiosInstance.post("/documents/create", payload),
+  //Login
+  login: (payload) => axiosInstance.post("/auth/login", payload),
 };
