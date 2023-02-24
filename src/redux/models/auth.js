@@ -4,6 +4,8 @@ const initialState = {
   isLogged: false,
   token: null,
   user_role: null,
+  refreshToken: null,
+  expireDate: null,
 };
 
 const auth = {
@@ -11,20 +13,16 @@ const auth = {
   reducers: {
     // handle state changes with pure functions
     login(state, payload) {
-      // const userRole = getUserRole(payload?.id_token);
-      return {
-        ...state,
-        token: payload?.id_token,
-      };
-    },
-    auth(state, payload) {
-      const token = localStorage.getItem("token").slice(7);
-      const userRole = getUserRole(token);
+      const userRole = getUserRole(payload?.accessToken);
+      console.log("User Role", userRole);
 
       return {
         ...state,
         isLogged: true,
         user_role: userRole,
+        token: payload?.accessToken,
+        refreshToken: payload?.refreshToken,
+        expireDate: payload?.expireDate,
       };
     },
   },

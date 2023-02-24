@@ -12,35 +12,35 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { useMutation } from "react-query";
+import { API } from "../../services/api";
+import getUserRole from "../../utils/getUserRole";
+import { dispatch } from "../../redux";
 
 const theme = createTheme();
 
 export default function SignIn() {
+  const { data, mutate } = useMutation(async (payload) => {
+    await API.login(payload)
+      .then((res) => {
+        // console.log("Login Success", res.data?.result);
+        dispatch.auth.login(res.data?.result);
+      })
+      .catch((err) => {
+        console.log("Login Fail");
+      });
+  });
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
+    mutate({
       email: data.get("email"),
       password: data.get("password"),
     });
+    // console.log({
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    // });
   };
 
   return (
@@ -113,7 +113,6 @@ export default function SignIn() {
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
       </Container>
     </ThemeProvider>
   );
