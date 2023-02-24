@@ -8,9 +8,9 @@ import { dispatch } from "../redux";
 const AppRoutes = () => {
   const { isLogged } = useSelector((store) => store.auth);
 
-  // useEffect(() => {
-  //   dispatch.auth.logoutAsync();
-  // }, []);
+  useEffect(() => {
+    dispatch.auth.logoutAsync();
+  }, []);
 
   return (
     <div>

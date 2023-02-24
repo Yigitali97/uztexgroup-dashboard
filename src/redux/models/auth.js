@@ -31,7 +31,6 @@ const auth = {
     // use async/await for async actions
     logoutAsync() {
       dispatch({ type: "RESET_APP" });
-      localStorage.removeItem("token");
     },
   }),
 };

@@ -5,8 +5,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import Link from "@mui/material/Link";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
@@ -14,22 +12,25 @@ import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useMutation } from "react-query";
 import { API } from "../../services/api";
-import getUserRole from "../../utils/getUserRole";
 import { dispatch } from "../../redux";
+import { toast } from "react-toastify";
 
 const theme = createTheme();
 
 export default function SignIn() {
-  const { data, mutate } = useMutation(async (payload) => {
+  const { mutate } = useMutation(async (payload) => {
     await API.login(payload)
       .then((res) => {
         // console.log("Login Success", res.data?.result);
+        toast.success("Tizmga muvoffaqiyatli kirdingiz!");
         dispatch.auth.login(res.data?.result);
       })
       .catch((err) => {
+        toast.error("Tizmga kirishda xatolik yuzberdi!");
         console.log("Login Fail");
       });
   });
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -37,10 +38,6 @@ export default function SignIn() {
       email: data.get("email"),
       password: data.get("password"),
     });
-    // console.log({
-    //   email: data.get("email"),
-    //   password: data.get("password"),
-    // });
   };
 
   return (
@@ -87,10 +84,10 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
@@ -99,18 +96,6 @@ export default function SignIn() {
             >
               Sign In
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Container>
