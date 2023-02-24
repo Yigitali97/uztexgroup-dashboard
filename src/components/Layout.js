@@ -10,32 +10,15 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Badge from "@mui/material/Badge";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import NotificationsIcon from "@mui/icons-material/Notifications";
-import { mainListItems, secondaryListItems } from "../constants/listItems";
+import LogoutIcon from "@mui/icons-material/Logout";
 
-function Copyright(props) {
-  return (
-    <Typography
-      variant="body2"
-      color="text.secondary"
-      align="center"
-      {...props}
-    >
-      {"Copyright © "}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
+import { adminListItems, superAdminListItems } from "../constants/listItems";
+import { useSelector } from "react-redux";
+import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
+import { dispatch } from "../redux";
 
 const drawerWidth = 240;
 
@@ -86,9 +69,17 @@ const Drawer = styled(MuiDrawer, {
 const mdTheme = createTheme();
 
 export default function Layout({ children }) {
+  const { user_role } = useSelector((store) => store.auth);
+  const sidebarList =
+    user_role === "Admin" ? adminListItems : superAdminListItems;
+
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
+  };
+
+  const onLogoutClick = () => {
+    dispatch.auth.logoutAsync();
   };
 
   return (
@@ -144,9 +135,14 @@ export default function Layout({ children }) {
           </Toolbar>
           <Divider />
           <List component="nav">
-            {mainListItems}
+            {sidebarList}
             <Divider sx={{ my: 1 }} />
-            {secondaryListItems}
+            <ListItemButton onClick={onLogoutClick}>
+              <ListItemIcon>
+                <LogoutIcon />
+              </ListItemIcon>
+              <ListItemText primary="Chiqish" />
+            </ListItemButton>
           </List>
         </Drawer>
         <Box
@@ -162,6 +158,7 @@ export default function Layout({ children }) {
           }}
         >
           <Toolbar />
+          {/* Render components here */}
 
           {children}
         </Box>
