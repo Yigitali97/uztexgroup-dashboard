@@ -22,6 +22,7 @@ export default function SignIn() {
     await API.login(payload)
       .then((res) => {
         // console.log("Login Success", res.data?.result);
+        localStorage.setItem('token', res.data?.result?.accessToken )
         toast.success("Tizmga muvoffaqiyatli kirdingiz!");
         dispatch.auth.login(res.data?.result);
       })
