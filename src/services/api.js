@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export const axiosInstance = Axios.create({
-  baseURL: "https://3896-91-90-219-174.in.ngrok.io/uz/api",
+  baseURL: "https://6d10-91-90-219-174.in.ngrok.io/uz/api",
 });
 
 axiosInstance.interceptors.request.use(
@@ -19,6 +19,10 @@ axiosInstance.interceptors.request.use(
 );
 
 export const API = {
-  //Login
+  //post
   login: (payload) => axiosInstance.post("/auth/login", payload),
+
+  //get
+  getAdmins: () => axiosInstance.get("/User"),
+  getAllNews: () => axiosInstance.get("/News"),
 };
