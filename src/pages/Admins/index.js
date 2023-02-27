@@ -4,7 +4,7 @@ import { useQuery } from "react-query";
 import { API } from "../../services/api";
 
 import AdminTable from "./AdminTable";
-import CreateAdmin from "./CreateAdmin";
+import CreateUser from "./CreateAdmin";
 
 const Admins = () => {
 
@@ -22,11 +22,11 @@ const Admins = () => {
         <Grid container spacing={3}>
           <Grid item xs={12}>
             <Paper sx={{ p: 2, display: "flex", flexDirection: "column", mb: 2 }}>
-              <CreateAdmin refetch={refetch} />
+              <CreateUser refetch={refetch} />
             </Paper>
             <Paper sx={{ p: 2, display: "flex", flexDirection: "column" }}>
 
-            <AdminTable data={data} isLoading={isLoading} />
+            <AdminTable data={data} isLoading={isLoading} refetch={refetch} />
             </Paper>
           </Grid>
         </Grid>

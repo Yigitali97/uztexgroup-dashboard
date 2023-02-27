@@ -5,9 +5,10 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Button, Typography } from "@mui/material";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import BasicModal from "../../components/Modal";
 
-export default function AdminTable({data, isLoading}) {
+export default function AdminTable({data, isLoading, refetch}) {
 
 
   return (
@@ -18,6 +19,8 @@ export default function AdminTable({data, isLoading}) {
       <Table size="small">
         <TableHead>
           <TableRow>
+          <TableCell />
+
             <TableCell>Ismi</TableCell>
             <TableCell>Familyasi</TableCell>
             <TableCell>E-mail</TableCell>
@@ -27,12 +30,15 @@ export default function AdminTable({data, isLoading}) {
         <TableBody>
           {!isLoading && !!data && data.map((row) => (
             <TableRow key={row.id}>
-              <TableCell>{row.firstName}</TableCell>
+              <TableCell align="left">
+                <BasicModal data={row} refetch={refetch} />
+              </TableCell>
+              <TableCell >{row.firstName}</TableCell>
               <TableCell>{row.lastName}</TableCell>
               <TableCell>{row.email}</TableCell>
               <TableCell align="right">
                 <Button variant="outlined">
-                  <MoreVertIcon />
+                  <DeleteForeverIcon color="error" />
                 </Button>
               </TableCell>
             </TableRow>

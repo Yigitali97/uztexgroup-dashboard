@@ -21,10 +21,16 @@ axiosInstance.interceptors.request.use(
 export const API = {
   //post
   login: (payload) => axiosInstance.post("/auth/login", payload),
-  createAdmin: (payload) => axiosInstance.post('/user', payload),
+  createUser: (payload) => axiosInstance.post('/user', payload),
   
   //get
   getAdmins: () => axiosInstance.get("/user"),
   getAllNews: () => axiosInstance.get("/news"),
 
+
+  //put 
+  updateUser: (payload) => axiosInstance.put('/user', payload),
+
+  //delete
+  deleteUser: (payload) => axiosInstance.delete(`/user/${payload}`),
 };
