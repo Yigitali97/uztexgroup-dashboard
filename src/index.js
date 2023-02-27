@@ -8,19 +8,22 @@ import store from "./redux";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { PersistGate } from "redux-persist/lib/integration/react";
 import { getPersistor } from "@rematch/persist";
+import { BrowserRouter } from "react-router-dom";
 
 const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={getPersistor()}>
-        <QueryClientProvider client={queryClient}>
-          <App />
-        </QueryClientProvider>
-      </PersistGate>
-    </Provider>
+    <BrowserRouter>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={getPersistor()}>
+          <QueryClientProvider client={queryClient}>
+            <App />
+          </QueryClientProvider>
+        </PersistGate>
+      </Provider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

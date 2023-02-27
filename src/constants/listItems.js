@@ -7,24 +7,15 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PeopleIcon from "@mui/icons-material/People";
 import BarChartIcon from "@mui/icons-material/BarChart";
 import LayersIcon from "@mui/icons-material/Layers";
-import LogoutIcon from "@mui/icons-material/Logout";
+import routeNames from "./routeNames";
 
-export const superAdminListItems = (
-  <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <BarChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="Reports" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <LayersIcon />
-      </ListItemIcon>
-      <ListItemText primary="Integrations" />
-    </ListItemButton>
-  </React.Fragment>
-);
+export const superAdminListItems = [
+  {
+    title: "Adminlar",
+    icon: <PeopleIcon />,
+    path: routeNames.ADMINS,
+  },
+];
 
 export const adminListItems = (
   <React.Fragment>
@@ -57,16 +48,6 @@ export const adminListItems = (
         <LayersIcon />
       </ListItemIcon>
       <ListItemText primary="Integrations" />
-    </ListItemButton>
-  </React.Fragment>
-);
-export const secondaryListItems = (
-  <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <LogoutIcon />
-      </ListItemIcon>
-      <ListItemText primary="Chiqish" />
     </ListItemButton>
   </React.Fragment>
 );

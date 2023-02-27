@@ -14,7 +14,7 @@ const auth = {
     // handle state changes with pure functions
     login(state, payload) {
       const userRole = getUserRole(payload?.accessToken);
-      console.log("User Role", userRole);
+      // console.log("User Role", userRole);
 
       return {
         ...state,
