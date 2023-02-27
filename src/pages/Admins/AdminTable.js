@@ -8,8 +8,18 @@ import { Button, Typography } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import BasicModal from "../../components/Modal";
 import DeleteConfirmation from "../../components/DeleteConfirmation";
+import { useMutation } from "react-query";
+import { API } from "../../services/api";
+import { toast } from "react-toastify";
 
 export default function AdminTable({ data, isLoading, refetch }) {
+
+  const {mutate} = useMutation(async (payload) => {
+    await API.deleteUser(payload).then(res => {
+      toast.success("Malumot o'chirildi!")
+      refetch()
+    }).catch(err => toast.error("Malumot o'chirishda xatolik!"))
+  })
   return (
     <React.Fragment>
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
@@ -38,7 +48,7 @@ export default function AdminTable({ data, isLoading, refetch }) {
                 <TableCell>{row.lastName}</TableCell>
                 <TableCell>{row.email}</TableCell>
                 <TableCell align="right">
-                  <DeleteConfirmation />
+                  <DeleteConfirmation data={row.id} mutate={mutate} />
                 </TableCell>
               </TableRow>
             ))}
