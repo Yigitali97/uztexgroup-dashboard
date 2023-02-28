@@ -1,7 +1,7 @@
 import Axios from "axios";
 
 export const axiosInstance = Axios.create({
-  baseURL: "http://localhost:5092/uz/api",
+  baseURL: "https://uztexgroup.azurewebsites.net/uz/api",
 });
 
 axiosInstance.interceptors.request.use(
