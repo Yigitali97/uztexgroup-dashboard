@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import styled from "styled-components";
 import { API } from "../../services/api";
 
-const CreateUser = ({ refetch }) => {
+const CreateCompany = ({ refetch }) => {
   const {
     register,
     handleSubmit,
@@ -15,14 +15,14 @@ const CreateUser = ({ refetch }) => {
   } = useForm();
 
   const { mutate } = useMutation(async (payload) => {
-    await API.createUser(payload)
+    await API.createCompany(payload)
       .then((res) => {
-        toast.success("Foydalanuchi yaratildi!");
+        toast.success("Kompaniya yaratildi!");
         refetch();
         reset();
       })
       .catch((err) => {
-        console.log("Admin yaratilmadi", err);
+        console.log("Kompamiya yaratilmadi", err);
         toast.error("Xalolik yuzberdi!");
       });
   });
@@ -34,56 +34,37 @@ const CreateUser = ({ refetch }) => {
   return (
     <Wrapper>
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
-        Admin yaratish
+        Kompaniya yaratish
       </Typography>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
           className="input"
           type="text"
-          placeholder="First name"
-          {...register("firstName", { required: true, maxLength: 80 })}
+          placeholder="Kompaniya nomi"
+          {...register("name", { required: true, maxLength: 80 })}
         />
-        <input
-          className="input"
-          type="text"
-          placeholder="Last name"
-          {...register("lastName", { required: true, maxLength: 100 })}
-        />
-        <input
-          className="input"
-          type="text"
-          placeholder="Email"
-          {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
-        />
-        <input
-          className="input"
-          type="text"
-          placeholder="Password"
-          {...register("password", { required: true })}
-        />
-
         <input type="submit" />
       </form>
     </Wrapper>
   );
 };
 
-export default CreateUser;
+export default CreateCompany;
 
 const Wrapper = styled.div`
   input {
-    height: 35px;
+    height: 40px;
     margin-right: 10px;
     border: 1px solid lightcoral;
-    border-radius: 8px;
+    border-radius: 5px;
     padding: 0px 5px;
+    width: 300px;
   }
-  /* input:required:focus{
-  border: 1px solid red;
-} */
   input:last-child {
-    background-color: lightgreen;
+    background-color: blue;
+    color: white;
+    font-size: 16px;
     padding: 0;
     width: 100px;
     cursor: pointer;
