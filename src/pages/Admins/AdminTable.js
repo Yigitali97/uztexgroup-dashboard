@@ -5,7 +5,7 @@ import TableCell from "@mui/material/TableCell";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import { Typography } from "@mui/material";
-import BasicModal from "../../components/Modal";
+import BasicModal from "./EditAdmin";
 import DeleteConfirmation from "../../components/DeleteConfirmation";
 import { useMutation } from "react-query";
 import { API } from "../../services/api";

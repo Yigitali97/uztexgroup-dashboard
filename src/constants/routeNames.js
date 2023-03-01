@@ -1,7 +1,7 @@
 const routeNames = {
-  HOME: "/",
-  LOGIN: "/login",
+  LOGIN: "/",
   ADMINS: "/admins",
+  COMPANIES: "/companies",
 };
 
 export default routeNames;

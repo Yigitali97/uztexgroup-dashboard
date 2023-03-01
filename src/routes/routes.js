@@ -4,7 +4,7 @@ import Home from "../pages/Home";
 
 export const PrivateRoutes = [
   {
-    path: routeNames.HOME,
+    path: routeNames.COMPANIES,
     element: <Home />,
   },
   {
