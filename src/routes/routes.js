@@ -1,6 +1,6 @@
 import routeNames from "../constants/routeNames";
-import Admins from "../pages/Admins";
-import Home from "../pages/Home";
+import Admins from "../pages/SuperAdmin";
+import Home from "../pages/Admin";
 
 export const PrivateRoutes = [
   {

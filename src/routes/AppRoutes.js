@@ -7,7 +7,8 @@ import { dispatch } from "../redux";
 import { PrivateRoutes } from "./routes";
 
 const AppRoutes = () => {
-  const { isLogged } = useSelector((store) => store.auth);
+  // const { isLogged } = useSelector((store) => store.auth);
+  const isLogged = true;
 
   // useEffect(() => {
   //   dispatch.auth.logoutAsync();
